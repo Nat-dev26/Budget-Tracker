@@ -1,0 +1,342 @@
+.bt-wrapper {
+  --bt-bg: #0f1115;
+  --bt-card: #171a20;
+  --bt-card-alt: #1c2029;
+  --bt-border: #262b33;
+  --bt-border-hover: #3a4150;
+  --bt-text: #e8e6e1;
+  --bt-text-dim: #8b8f98;
+  --bt-accent: #c9a35c;
+  --bt-accent-hover: #dab876;
+  --bt-accent-dim: #8a7248;
+  --bt-good: #4fae8b;
+  --bt-bad: #dd6b5a;
+
+  min-height: 100%;
+  background: var(--bt-bg);
+  color: var(--bt-text);
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  padding: 40px 16px;
+  display: flex;
+  justify-content: center;
+}
+
+.bt-container {
+  width: 100%;
+  max-width: 440px;
+}
+
+.bt-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.bt-logo {
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  background: var(--bt-card-alt);
+  border: 1px solid var(--bt-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--bt-accent);
+}
+
+.bt-title {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+.bt-subtitle {
+  font-size: 12px;
+  color: var(--bt-text-dim);
+}
+
+.bt-card {
+  background: var(--bt-card);
+  border: 1px solid var(--bt-border);
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.bt-label {
+  font-size: 12px;
+  color: var(--bt-text-dim);
+  margin-bottom: 6px;
+}
+
+.bt-summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.bt-summary-right {
+  text-align: right;
+}
+
+.bt-amount-big {
+  font-size: 30px;
+  font-weight: 600;
+  font-family: "SF Mono", ui-monospace, Menlo, monospace;
+  color: var(--bt-text);
+}
+
+.bt-amount-big.is-over {
+  color: var(--bt-bad);
+}
+
+.bt-budget-display {
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  color: var(--bt-text-dim);
+  font-family: "SF Mono", ui-monospace, Menlo, monospace;
+  font-size: 16px;
+  padding: 4px 6px;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.bt-budget-display:hover {
+  border-color: var(--bt-border-hover);
+  color: var(--bt-text);
+}
+
+.bt-budget-input {
+  width: 90px;
+  background: transparent;
+  border: 1px solid var(--bt-accent);
+  border-radius: 6px;
+  color: var(--bt-text);
+  font-family: "SF Mono", ui-monospace, Menlo, monospace;
+  font-size: 16px;
+  padding: 4px 6px;
+  text-align: right;
+  outline: none;
+}
+
+.bt-progress-track {
+  margin-top: 18px;
+  height: 8px;
+  border-radius: 4px;
+  background: var(--bt-card-alt);
+  border: 1px solid var(--bt-border);
+  overflow: hidden;
+}
+
+.bt-progress-fill {
+  height: 100%;
+  border-radius: 4px;
+  background: var(--bt-accent);
+  transition: width 0.3s ease;
+}
+
+.bt-progress-fill.is-over {
+  background: var(--bt-bad);
+}
+
+.bt-progress-msg {
+  margin-top: 10px;
+  font-size: 12.5px;
+}
+
+.bt-progress-msg.is-good {
+  color: var(--bt-good);
+}
+
+.bt-progress-msg.is-over {
+  color: var(--bt-bad);
+}
+
+.bt-form-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.bt-input {
+  flex: 1;
+  background: var(--bt-card-alt);
+  border: 1px solid var(--bt-border);
+  border-radius: 8px;
+  color: var(--bt-text);
+  font-size: 13px;
+  padding: 9px 10px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.bt-input:focus {
+  border-color: var(--bt-accent);
+}
+
+.bt-input-mono {
+  font-family: "SF Mono", ui-monospace, Menlo, monospace;
+}
+
+.bt-input-full {
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 12px;
+}
+
+.bt-category-row {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+
+.bt-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border-radius: 8px;
+  font-size: 12.5px;
+  cursor: pointer;
+  background: transparent;
+  color: var(--bt-text-dim);
+  border: 1px solid var(--bt-border);
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+
+.bt-chip:hover {
+  border-color: var(--bt-border-hover);
+}
+
+.bt-chip.is-active {
+  background: rgba(201, 163, 92, 0.12);
+  color: var(--bt-accent);
+  border-color: var(--bt-accent-dim);
+}
+
+.bt-add-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 0;
+  border-radius: 9px;
+  background: var(--bt-accent);
+  color: #171a20;
+  font-weight: 600;
+  font-size: 13.5px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.05s;
+}
+
+.bt-add-btn:hover {
+  background: var(--bt-accent-hover);
+}
+
+.bt-add-btn:active {
+  transform: scale(0.98);
+}
+
+.bt-section-label {
+  font-size: 12.5px;
+  color: var(--bt-text-dim);
+  margin: 0 4px 10px;
+}
+
+.bt-empty {
+  color: var(--bt-text-dim);
+  font-size: 13px;
+  padding: 20px 4px;
+}
+
+.bt-day-card {
+  background: var(--bt-card);
+  border: 1px solid var(--bt-border);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+}
+
+.bt-day-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12.5px;
+  color: var(--bt-text-dim);
+  margin-bottom: 10px;
+}
+
+.bt-cat-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.bt-cat-chip {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--bt-card-alt);
+  border: 1px solid var(--bt-border);
+  border-radius: 7px;
+  padding: 5px 9px;
+  font-size: 12px;
+  color: var(--bt-text-dim);
+}
+
+.bt-cat-chip-amount {
+  color: var(--bt-accent);
+  font-size: 12px;
+}
+
+.bt-mono {
+  font-family: "SF Mono", ui-monospace, Menlo, monospace;
+  color: var(--bt-text);
+  font-size: 13px;
+}
+
+.bt-expense-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 0;
+  border-top: 1px solid var(--bt-border);
+}
+
+.bt-expense-left {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 13px;
+}
+
+.bt-expense-icon {
+  color: var(--bt-text-dim);
+}
+
+.bt-expense-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bt-delete-btn {
+  background: transparent;
+  border: none;
+  color: var(--bt-text-dim);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 6px;
+  display: flex;
+  transition: color 0.2s, background 0.2s;
+}
+
+.bt-delete-btn:hover {
+  color: var(--bt-bad);
+  background: rgba(221, 107, 90, 0.1);
+}
