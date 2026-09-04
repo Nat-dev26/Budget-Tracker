@@ -30,7 +30,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 28px;
+  margin-bottom: 20px;
 }
 
 .bt-logo {
@@ -54,6 +54,42 @@
 .bt-subtitle {
   font-size: 12px;
   color: var(--bt-text-dim);
+}
+
+.bt-tabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 20px;
+  background: var(--bt-card-alt);
+  border: 1px solid var(--bt-border);
+  border-radius: 10px;
+  padding: 4px;
+}
+
+.bt-tab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 0;
+  border-radius: 7px;
+  font-size: 13px;
+  color: var(--bt-text-dim);
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.bt-tab:hover {
+  color: var(--bt-text);
+}
+
+.bt-tab.is-active {
+  background: var(--bt-card);
+  color: var(--bt-accent);
+  border-color: var(--bt-border);
 }
 
 .bt-card {
