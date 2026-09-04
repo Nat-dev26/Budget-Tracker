@@ -296,7 +296,7 @@ function App() {
             <div className="bt-section-label">Full history</div>
             {byDay.length === 0 && (
               <div className="bt-empty">
-                Wala ka pang naitatalang gastos. Pumunta sa "Track" tab para magdagdag.
+                You haven't recorded any expenses yet. Go to the "Track" tab to add one.
               </div>
             )}
             {byDay.map(([d, items]) => (
