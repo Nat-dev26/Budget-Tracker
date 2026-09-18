@@ -1,0 +1,107 @@
+.auth-wrapper {
+  min-height: 100vh;
+  background: #0f1115;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 340px;
+  background: #171a20;
+  border: 1px solid #262b33;
+  border-radius: 16px;
+  padding: 32px 28px;
+  text-align: center;
+}
+
+.auth-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: #1c2029;
+  border: 1px solid #262b33;
+  color: #c9a35c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+}
+
+.auth-title {
+  color: #e8e6e1;
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.auth-subtitle {
+  color: #8b8f98;
+  font-size: 13px;
+  margin-bottom: 24px;
+}
+
+.auth-input {
+  width: 100%;
+  box-sizing: border-box;
+  background: #1c2029;
+  border: 1px solid #262b33;
+  border-radius: 8px;
+  color: #e8e6e1;
+  font-size: 14px;
+  padding: 11px 12px;
+  margin-bottom: 10px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.auth-input:focus {
+  border-color: #c9a35c;
+}
+
+.auth-error {
+  color: #dd6b5a;
+  font-size: 12.5px;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.auth-btn {
+  width: 100%;
+  padding: 11px 0;
+  border-radius: 9px;
+  background: #c9a35c;
+  color: #171a20;
+  font-weight: 600;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  margin-top: 4px;
+  transition: background 0.2s;
+}
+
+.auth-btn:hover {
+  background: #dab876;
+}
+
+.auth-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.auth-switch {
+  background: transparent;
+  border: none;
+  color: #8b8f98;
+  font-size: 12.5px;
+  margin-top: 18px;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.auth-switch:hover {
+  color: #c9a35c;
+}

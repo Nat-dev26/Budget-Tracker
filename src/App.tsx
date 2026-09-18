@@ -1,4 +1,6 @@
 import { useState, useMemo, useEffect } from "react";
+import { onAuthStateChanged, signOut, type User } from "firebase/auth";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import {
   Plus,
   Trash2,
@@ -9,7 +11,10 @@ import {
   Wallet,
   History,
   ListChecks,
+  LogOut,
 } from "lucide-react";
+import { auth, db } from "./firebase";
+import Auth from "./auth";
 import "./App.css";
 
 const CATEGORIES = [
@@ -18,8 +23,6 @@ const CATEGORIES = [
   { id: "transport", label: "Transport", icon: Car },
   { id: "other", label: "Other", icon: MoreHorizontal },
 ];
-
-const STORAGE_KEY = "budget-tracker-data";
 
 function todayISO() {
   return new Date().toISOString().slice(0, 10);
@@ -50,44 +53,59 @@ type Expense = {
   amount: number;
 };
 
-type StoredData = {
-  budget: number;
-  expenses: Expense[];
-};
-
-function loadFromStorage(): StoredData | null {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return null;
-    return JSON.parse(raw) as StoredData;
-  } catch {
-    return null;
-  }
-}
-
 function App() {
-  const saved = loadFromStorage();
+  const [user, setUser] = useState<User | null>(null);
+  const [authLoading, setAuthLoading] = useState(true);
+  const [dataLoaded, setDataLoaded] = useState(false);
 
   const [view, setView] = useState<"track" | "history">("track");
 
-  const [budget, setBudget] = useState(saved?.budget ?? 0);
-  const [budgetDraft, setBudgetDraft] = useState(String(saved?.budget ?? 0));
+  const [budget, setBudget] = useState(0);
+  const [budgetDraft, setBudgetDraft] = useState("0");
   const [editingBudget, setEditingBudget] = useState(false);
 
-  const [expenses, setExpenses] = useState<Expense[]>(saved?.expenses ?? []);
+  const [expenses, setExpenses] = useState<Expense[]>([]);
 
   const [amount, setAmount] = useState("");
   const [category, setCategory] = useState("food");
   const [note, setNote] = useState("");
   const [date, setDate] = useState(todayISO());
 
+  // watch login state
   useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify({ budget, expenses }));
-    } catch {
-      // storage unavailable, ignore
-    }
-  }, [budget, expenses]);
+    const unsub = onAuthStateChanged(auth, (u) => {
+      setUser(u);
+      setAuthLoading(false);
+      setDataLoaded(false);
+    });
+    return unsub;
+  }, []);
+
+  // load this user's data from Firestore once logged in
+  useEffect(() => {
+    if (!user) return;
+    (async () => {
+      const ref = doc(db, "users", user.uid);
+      const snap = await getDoc(ref);
+      if (snap.exists()) {
+        const data = snap.data();
+        setBudget(data.budget ?? 0);
+        setBudgetDraft(String(data.budget ?? 0));
+        setExpenses(data.expenses ?? []);
+      } else {
+        setBudget(0);
+        setExpenses([]);
+      }
+      setDataLoaded(true);
+    })();
+  }, [user]);
+
+  // save to Firestore whenever budget/expenses change (after initial load)
+  useEffect(() => {
+    if (!user || !dataLoaded) return;
+    const ref = doc(db, "users", user.uid);
+    setDoc(ref, { budget, expenses }, { merge: true }).catch(() => {});
+  }, [budget, expenses, user, dataLoaded]);
 
   const weekTotal = useMemo(
     () => expenses.reduce((sum, e) => sum + e.amount, 0),
@@ -139,6 +157,18 @@ function App() {
     setEditingBudget(false);
   }
 
+  if (authLoading) {
+    return <div className="bt-loading">Loading...</div>;
+  }
+
+  if (!user) {
+    return <Auth />;
+  }
+
+  if (!dataLoaded) {
+    return <div className="bt-loading">Loading your data...</div>;
+  }
+
   return (
     <div className="bt-wrapper">
       <div className="bt-container">
@@ -146,10 +176,13 @@ function App() {
           <div className="bt-logo">
             <Wallet size={17} />
           </div>
-          <div>
+          <div style={{ flex: 1 }}>
             <div className="bt-title">Weekly ledger</div>
-            <div className="bt-subtitle">Track what you spend, day by day</div>
+            <div className="bt-subtitle">{user.email}</div>
           </div>
+          <button className="bt-logout-btn" onClick={() => signOut(auth)} title="Log out">
+            <LogOut size={16} />
+          </button>
         </div>
 
         <div className="bt-tabs">
@@ -296,7 +329,7 @@ function App() {
             <div className="bt-section-label">Full history</div>
             {byDay.length === 0 && (
               <div className="bt-empty">
-                You haven't recorded any expenses yet. Go to the "Track" tab to add one.
+                Wala ka pang naitatalang gastos. Pumunta sa "Track" tab para magdagdag.
               </div>
             )}
             {byDay.map(([d, items]) => (
