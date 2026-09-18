@@ -73,7 +73,7 @@ function App() {
 
   // watch login state
   useEffect(() => {
-    const unsub = onAuthStateChanged(auth, (u) => {
+      const unsub = onAuthStateChanged(auth, (u: User | null) => {
       setUser(u);
       setAuthLoading(false);
       setDataLoaded(false);
