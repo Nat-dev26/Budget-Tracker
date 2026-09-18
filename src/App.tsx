@@ -14,7 +14,7 @@ import {
   LogOut,
 } from "lucide-react";
 import { auth, db } from "./firebase";
-import Auth from "./auth";
+import Auth from "./Auth";
 import "./App.css";
 
 const CATEGORIES = [
