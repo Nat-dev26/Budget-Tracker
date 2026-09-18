@@ -94,7 +94,7 @@ export default function Auth() {
         >
           {mode === "login"
             ? "Don't have an account? sign up"
-            : "May account ka na? Mag-login"}
+            : "Do you have an account? login"}
         </button>
       </div>
     </div>
